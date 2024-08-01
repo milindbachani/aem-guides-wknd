@@ -39,7 +39,7 @@ public class HelloWorldModel {
     @Default(values="No resourceType")
     protected String resourceType;
 
-    private static String password="password";
+    private static String password="password-again";
 
     @SlingObject
     private Resource currentResource;
