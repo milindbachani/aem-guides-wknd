@@ -24,7 +24,7 @@ import java.util.Map;
 public class PushDataAjoServlet extends SlingAllMethodsServlet {
 
     @Reference
-    private TokenService tokenService;
+    private transient TokenService tokenService;
 
     @Override
     protected void doPost(SlingHttpServletRequest request, SlingHttpServletResponse response) throws IOException {

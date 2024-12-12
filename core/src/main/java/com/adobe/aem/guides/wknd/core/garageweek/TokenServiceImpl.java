@@ -100,5 +100,8 @@ public class TokenServiceImpl implements TokenService {
             }
             return result.toString();
         }
+        finally {
+            client.close();
+        }
     }
 }
