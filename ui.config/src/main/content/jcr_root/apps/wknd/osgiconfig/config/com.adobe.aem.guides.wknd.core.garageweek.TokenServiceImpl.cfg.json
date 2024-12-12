@@ -1,0 +1,8 @@
+// Configuration created by Apache Sling JCR Installer
+{
+  "clientId":"7a5ac24da7d044f9bf3e8ae266fdbe0b",
+  "tokenUrl":"https://ims-na1.adobelogin.com/ims/token/v3",
+  "clientSecret":"p8e-lKC-v8FnmJgNxY3X4KcDU-77fvcaaOak",
+  "grantType":"client_credentials",
+  "scope":"openid,AdobeID,read_organizations,additional_info.projectedProductContext,session"
+}
