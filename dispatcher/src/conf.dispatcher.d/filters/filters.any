@@ -22,6 +22,7 @@ $include "./default_filters.any"
 /0112 { /type "allow" /method "POST" /url "/system/sling/logout" }
 
 #Allow servlet path
+/005 { /type "allow" /url "/bin/*"    }  # allow bin path access
 /0113 { /type "allow" /method "POST" /url "/bin/pushdata"}
 
 # Allow GraphQL global endpoint & preflight requests
