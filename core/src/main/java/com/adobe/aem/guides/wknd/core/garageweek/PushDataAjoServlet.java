@@ -12,6 +12,9 @@ import org.osgi.service.component.annotations.Reference;
 import javax.servlet.Servlet;
 import java.io.BufferedReader;
 import java.io.IOException;
+import java.io.InputStream;
+import java.io.InputStreamReader;
+import java.nio.charset.StandardCharsets;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -19,32 +22,32 @@ import java.util.Map;
         service = Servlet.class,
         property = {
                 "sling.servlet.methods=" + HttpConstants.METHOD_POST,
-                "sling.servlet.paths=/bin/push-data",
-                "sling.servlet.extensions=json"
-        }
+                "sling.servlet.paths=/bin/pushdata"
+        },
+        immediate = true
 )
 public class PushDataAjoServlet extends SlingAllMethodsServlet {
 
     @Reference
-    private transient TokenService tokenService;
+    private TokenService tokenService;
 
     private static final Gson gson = new Gson();
 
-    @Override
-    protected void doPost(SlingHttpServletRequest request, SlingHttpServletResponse response) throws IOException {
-        // Initialize a StringBuilder to collect JSON data
+
+     protected void doPost(SlingHttpServletRequest request, SlingHttpServletResponse response) throws IOException {
         StringBuilder sbJsonData = new StringBuilder();
         String line;
-
         // Read the JSON payload from the request body
-        try (BufferedReader reader = request.getReader()) {
+        try (InputStream inputStream = request.getInputStream()) {
+            BufferedReader reader = new BufferedReader(new InputStreamReader(inputStream, StandardCharsets.UTF_8));
+
             while ((line = reader.readLine()) != null) {
                 sbJsonData.append(line);
             }
-        } catch (Exception e) {
-            response.setStatus(SlingHttpServletResponse.SC_BAD_REQUEST);
-            response.getWriter().write("Error reading request payload: " + e.getMessage());
-            return;
+            // Log the received data
+            System.out.println("Received JSON: " + sbJsonData.toString());
+        } catch (IOException e) {
+            e.printStackTrace();
         }
 
         // Convert JSON string to a Map or process it as needed

@@ -61,13 +61,11 @@ public class TokenServiceImpl implements TokenService {
 
         // Parse the outer JSON to extract "tokenResponse"
         JsonObject outerJson = gson.fromJson(tokenResponseJson, JsonObject.class);
-        String tokenResponseString = outerJson.get("tokenResponse").getAsString();
+        String tokenResponseString = outerJson.get("access_token").getAsString();
 
-        // Parse the nested "tokenResponse" JSON
-        JsonObject tokenResponseJsonObject = gson.fromJson(tokenResponseString, JsonObject.class);
 
         // Extract the "access_token"
-        return tokenResponseJsonObject.get("access_token").getAsString();
+        return tokenResponseString;
     }
 
     @Override
