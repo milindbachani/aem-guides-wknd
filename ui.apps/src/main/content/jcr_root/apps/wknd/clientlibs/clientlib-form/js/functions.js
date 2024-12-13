@@ -19,7 +19,6 @@ function submitFormData() {
 
                     if (!formData) {
                         console.error("Form data is unavailable or malformed.");
-                        alert("Unable to submit form. Data is not properly structured.");
                         return;
                     }
 
@@ -31,10 +30,9 @@ function submitFormData() {
                     xhr.onreadystatechange = function () {
                         if (xhr.readyState === 4) {
                             if (xhr.status === 200) {
-                                alert("Form submitted successfully: " + xhr.responseText);
+                                console.log("Form submitted successfully: " + xhr.responseText);
                             } else {
                                 console.error("Error submitting form. Status: " + xhr.status);
-                                alert("Error submitting form. Please try again later.");
                             }
                         }
                     };
@@ -42,12 +40,10 @@ function submitFormData() {
                     xhr.send(JSON.stringify(formData));
                 } catch (e) {
                     console.error("Error processing form data:", e);
-                    alert("An error occurred while processing the form. Please try again.");
                 }
             },
             error: function (error) {
                 console.error("Error fetching form data via GuideBridge:", error);
-                alert("Unable to fetch form data. Please ensure all fields are correctly filled.");
             }
         });
     }
