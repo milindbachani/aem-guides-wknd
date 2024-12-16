@@ -31,6 +31,8 @@ function submitFormData() {
                         if (xhr.readyState === 4) {
                             if (xhr.status === 200) {
                                 console.log("Form submitted successfully: " + xhr.responseText);
+
+                                window.location.href = "/content/wknd/us/en/thank-you.html";
                             } else {
                                 console.error("Error submitting form. Status: " + xhr.status);
                             }
